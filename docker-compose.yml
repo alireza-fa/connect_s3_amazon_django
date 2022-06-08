@@ -1,0 +1,66 @@
+version: "3"
+
+services:
+  s3_rabbitmq:
+    container_name: s3_rabbitmq
+    image: rabbitmq:latest
+    networks:
+      - s3_main
+    restart: always
+
+  celery_worker:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: django_celery_s3
+    command: "celery -A A worker -l INFO"
+    volumes:
+      - .:/s3_app
+    depends_on:
+      - s3_app
+      - s3_rabbitmq
+    environment:
+      - BROKER_URL=amqp://rabbitmq
+      - RESULT_BACKEND=rpc://
+      - C_FORCE_ROOT=true
+    networks:
+      - s3_main
+    restart: always
+
+  s3_app:
+    build: .
+    command: "gunicorn A.wsgi -b 0.0.0.0:8000"
+    container_name: s3_app
+    volumes:
+      - .:/code/
+      - s3_static_volume:/code/static
+    depends_on:
+      - s3_rabbitmq
+    expose:
+      - "8000"
+    networks:
+      - s3_main
+      - s3_nginx_network
+    restart: always
+
+  s3_nginx:
+    container_name: s3_nginx
+    image: nginx:latest
+    command: nginx -g 'daemon off;'
+    ports:
+      - "80:80"
+    volumes:
+      - s3_static_volume:/code/static
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - s3_nginx_network
+    restart: always
+
+volumes:
+  s3_static_volume:
+    external: true
+networks:
+  s3_main:
+    external: true
+  s3_nginx_network:
+    external: true
