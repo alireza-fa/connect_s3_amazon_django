@@ -139,10 +139,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
     Note: 
         we have many configs for s3, but this config enough for me.
 """
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_ACCESS_KEY_ID = '650fa88d-a7b0-4259-832f-1ccdaed16b23'
-AWS_SECRET_ACCESS_KEY = '2a54961c9f2b8fdd1cbbc70997f2d67704d1b99a121d26abfceb78082c9698d4'
-AWS_STORAGE_BUCKET_NAME = 'django-shop-ali'
+DEFAULT_FILE_STORAGE = ''
+AWS_ACCESS_KEY_ID = ''
+AWS_SECRET_ACCESS_KEY = ''
+AWS_STORAGE_BUCKET_NAME = ''
 AWS_S3_FILE_OVERWRITE = False  # default is True, the same name files will overwrite each other
 AWS_S3_ENDPOINT_URL = 'https://s3.ir-thr-at1.arvanstorage.com'
 AWS_SERVICE_NAME = 's3'  # Not required automatically
