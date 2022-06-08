@@ -1,6 +1,7 @@
 # connect s3 amazon in django
 
 for use:
+
   - set s3 configs * settings.py *
   - docker network create s3_main
   - docker network create s3_nginx_network
@@ -17,8 +18,9 @@ Technologies used:
   - boto3
 
 About the project:
-  This project connects our media files to Amazon S3.
-  It is also connected to the celery and can be used when needed.
+
+  - This project connects our media files to Amazon S3.
+  - It is also connected to the celery and can be used when needed.
 
 درباره پروژه:
 
@@ -26,11 +28,10 @@ About the project:
   
   در این پروژه بجز استفاده از باکت های آروان کلود برای media فایل ها، پروژه را به celery نیز متصل کرده ام. زیرا در دیلیت کردن و ... ممکن است تاخیری بوجود بیاید که با سلری این را برای کاربران غیر قابل لمس کردن میکنیم.
   
-    همچنین پروژه داکرایز شده است تا به سادگی بتوانید با چند خط کد اجرایش کنید.
+  همچنین پروژه داکرایز شده است تا به سادگی بتوانید با چند خط کد اجرایش کنید.
     
  نکته:
  
    در پروژه های واقعی ما تنظیماتی مانند SECRET_KEY و یا تنظیمات s3 را در یک فایل دیگری برای مثال local_settings.py قرار میدهیم و در settings.py پروژه import میکنیم تا در گیت هاب این تنظیماتی که امنیتی هستند قابل مشاهده نباشد.
-   
- 
-    امیدوارم این پروژه برای شما مفید باشد.
+
+  امیدوارم این پروژه برای شما مفید باشد.
